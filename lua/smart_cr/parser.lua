@@ -154,7 +154,7 @@ M.is_endwised = function(snode, endwordlist)
 			-- 1) check each node has proper endword
 			Debug.debug_print('-----------------------------' .. node:type() .. '--------------------')
 			local endword_snode = vim.split(vim.treesitter.get_node_text(node, 0), '\n', {plain = true})
-			Debug.debug_print(endword_snode)
+			Debug.debug_print({endword_snode[1], endword_snode[#endword_snode]})
 			local has_endword = endword_snode[#endword_snode]:find('%s*' .. endword .. '%s*$') or false
 			has_endword = has_endword and not endword_snode[#endword_snode]:find(commentmark .. '%s+' .. endword .. '[^%w]*$')
 			if not has_endword then
