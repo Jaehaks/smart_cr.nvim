@@ -49,11 +49,10 @@ end
 
 -- find root node
 ---@param snode TSNode? Start node to detect root node
----@param at_cursor boolean if true, find root which is at cursor line
 ---@param endwordlist string[] if it is valid, find root which is included in endwordlist
 ---@return TSNode? root node
-local function get_root_node(snode, at_cursor, endwordlist)
-	at_cursor = at_cursor or false
+local function get_root_node(snode, endwordlist)
+	local at_cursor = not snode -- if snode is nil, start from current node
 
 	-- get current node if snode is nil
 	if not snode then
@@ -98,7 +97,7 @@ M.is_node = function(targets)
 	table.insert(targets, 'ERROR') -- consider ERROR node automatically
 
 	-- get root
-	local root = get_root_node(nil, true)
+	local root = get_root_node()
 	if not root then
 		return nil
 	end
@@ -133,7 +132,7 @@ end
 M.is_endwised = function(snode, endwordlist)
 
 	-- get root node which has endwise structure from cursor region
-	local root = get_root_node(snode, false, endwordlist)
+	local root = get_root_node(snode, endwordlist)
 	if not root then
 		return nil
 	end
