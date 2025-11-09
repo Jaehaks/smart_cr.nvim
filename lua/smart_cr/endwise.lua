@@ -103,6 +103,7 @@ M.endwise_cr = function(mode)
 	for _, r in ipairs(rules) do
 		rule.pattern, rule.endword, rule.ts_nodes = unpack(r)
 		endwordlist['currentnode'] = rule.endword -- add current node's endword
+		endwordlist['ERROR'] = rule.endword
 
 		if is_valid(ctx.line, rule, endwordlist) then
 			-- add endword

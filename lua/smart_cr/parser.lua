@@ -61,7 +61,6 @@ local function get_root_node(snode, endwordlist)
 			return nil
 		end
 	end
-	-- vim.print(snode:type())
 
 	-- get current cursor position
 	local cursor = vim.api.nvim_win_get_cursor(0)
@@ -139,7 +138,6 @@ M.is_endwised = function(snode, endwordlist)
 
 	-- add 'ERROR' node to check endword
 	local endword = endwordlist['currentnode']
-	local _endwordlist = vim.tbl_deep_extend('keep', {ERROR = endword}, endwordlist)
 
 	-- find commentmark and escaped
 	local commentstring = vim.o.commentstring
@@ -179,7 +177,7 @@ M.is_endwised = function(snode, endwordlist)
 	end
 
 	-- check current nodes is already endwised
-	local final_endword = for_nodes(root, _endwordlist, check_endword)
+	local final_endword = for_nodes(root, endwordlist, check_endword)
 	if final_endword then
 		return final_endword[1]
 	end
